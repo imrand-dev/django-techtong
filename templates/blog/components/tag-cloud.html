@@ -1,0 +1,14 @@
+<div class="mb-3">
+    <div class="border-bottom">
+        <div class="pb-4">
+            <h6 class="pb-2 fw-bold">DISCOVER MORE OF WHAT MATTERS TO YOU</h6>
+            {% for tag in tags %}
+            <span class="border border-dark p-1 mb-2 px-3 me-1 rounded-pill" style="display:inline-block;">
+                <a class="text-decoration-none text-dark" style="font-size:0.9375rem; font-weight: 500;" href="{% url 'post_by_tag' tag.slug %}">
+                    {{ tag.name|lower|capfirst }}
+                </a>
+            </span>
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+{% extends './3-col-template.html' %}
+{% block title %} {{ post.title }} {% endblock %}
+
+{% block content-left %}
+{% include './sticky-navbar.html' %}
+{% endblock %}
+
+{% block content-mid %}
+<div class="blogger center mx-auto" style="max-width:683px">
+    <p class="text-muted m-0">{{ post.author }}</p>
+    <p class="text-muted pb-3 m-0">{{ post.updated_at|date:"F d, Y" }}</p>
+    <h2 class="title pb-2">{{ post.title }}</h2>
+    <h4 class="text-muted subtitle pb-3">{{ post.subtitle }}</h4>
+    <div class="post">{{ post.content|markdown|safe }}</div>
+</div>
+{% endblock %}
+
+{% block content-right %}
+{% sidebar_tag_cloud %}
+
+<div class='col-12'>
+    <p class='m-0 pb-3'>Recent Post from {{ post.author }} </p>
+
+    {% for post_ in posts %}
+        <a target="_blank" href='{% url "single_post" post_.slug %}' class='text-decoration-none text-dark'>
+            <div class='card mb-2 border-0'>
+                <div class='row'>
+                    <div class='col-12'>
+                        <h6 class='text-dark'> {{ post_.title|truncatechars:80 }} </h6>
+                    </div>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>
+{% endblock %}

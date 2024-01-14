@@ -1,0 +1,29 @@
+
+{% extends './3-col-template.html' %}
+{% block title %} {{ search }} {% endblock %}
+
+{% block content-left %}
+{% include './sticky-navbar.html' %}
+{% endblock %}
+
+{% block content-mid %}
+
+<div class="center mx-auto">
+    <h1 class="fw-bold pb-5"> 
+        {% if search_posts %}
+            <span class='text-muted'>Result for {{ search }}</span>
+        {% else %}
+            <span> Try again </span>
+        {% endif %}
+    </h1>
+    {% include './components/search-list-elements.html' %}
+    {% if not search_posts %}
+        <p class='m-0 col-12'>Try searching for something else!</p>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block content-right %}
+{% sidebar_tag_cloud %}
+{% endblock %}

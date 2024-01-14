@@ -1,0 +1,27 @@
+{% for post in posts %}
+
+<a href='{% url "single_post" post.slug %}' class='text-decoration-none'>
+    {% if forloop.last %}
+    <div class='card border-0 pb-3 pb-sm-5' 
+        hx-trigger="revealed" 
+        hx-get="{% url 'home' %}?page={{ page_obj.number|add:1 }}" 
+        hx-swap="afterend">
+    {% else %}
+    <div class='card border-0 pb-3 pb-sm-5'>
+        {% endif %}
+        <div class='row'>
+            <div class='col-sm-8'>
+                <div class='card-body p-0'>
+                    <div class='pb-2 text-body infinite-scroll-author'>{{ post.author.username }}</div>
+                    <h4 class='mb-1 color-black infinite-scroll-title'>{{ post.title|truncatechars:60 }}</h4>
+                    <h5 class='text-muted d-none d-sm-block fw-normal infinite-scroll-subtitle'> {{ post.subtitle|truncatechars:75  }} </h5>
+                    <div class='text-muted infinite-scroll-date'> {{ post.updated_at|date:"F d, Y" }} </div>
+                </div>
+            </div>
+            <div class='col-sm-4'>
+                <img src='https://random.imagecdn.app/205/115' alt='tutorial-picture' class='img-fluid float-end infinite-image'>
+            </div>
+        </div>
+    </div>
+</a>
+{% endfor %}
